@@ -16,18 +16,29 @@ The purpose of this piece of code is for collecting the file name of
 
 int main(int argc, char** argv)
 {
+     std::string         file_path;
+     std::string         file_text;
+
+     std::ifstream       in_stream;
+     
      if (argc)
      {
-          std::string file_string{ argv[1] };
-          std::ifstream in(file_string);
-          std::string source_string(
-               ( std::istreambuf_iterator<char>(in) ),
-                 std::istreambuf_iterator<char>()   );
+          file_path.assign(argv[1]);                   // get CL arg and assign it to file_path
+          std::cout << "Retrieved CL arg: \n" 
+                    << file_path 
+                    << std::endl;
 
-          std::cout << source_string << std::endl;
+          //try
+          //{
+          //     //in_stream.open(file_path);
+          //}
+          //catch ()
+          //{
+
+          //}
      }
      
-     std::cin.get(); // temp fix to keep the console window up before termination of program
+     std::cin.get();
      return 0;
 }
 
