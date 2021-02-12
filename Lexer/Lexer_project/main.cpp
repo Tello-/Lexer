@@ -13,32 +13,41 @@ The purpose of this piece of code is for collecting the file name of
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 int main(int argc, char** argv)
 {
      std::string file_path;
      std::ifstream in_stream;
      
-     if (argc)
+     if (argc > 1) // problem is this can pass even when the filepath is not a good one
      {
           file_path.assign(argv[1]);                   // get CL arg and assign it to file_path
-          std::cout << "Retrieved CL arg: \n" 
+          std::cout << "\n\nRetrieved CL arg: \n"      // report file path retrieved
                     << file_path 
                     << std::endl;
-          int iValue;
+
+          in_stream.exceptions(std::ifstream::failbit); // exception mask for following try block
           try
           {
-               in_stream.open(file_path);              // opening the source file
+               in_stream.open(file_path, std::ifstream::in);              // opening the source file
+                              
           }
-          catch (std::exception exc)                   // TODO: figure out best way to handle exceptions here
-          {
-               std::cerr << "Caught Exception: " << exc.what();
-               
+          catch (const std::ifstream::failure& e) {
+               std::ostringstream msg;
+               msg << "\n\n**ERROR** \n\nOpening file '" << file_path
+                    << "' failed, it either doesn't exist or is not accessible.\n\n";
+               std::cout << msg.str();
                return 1;
           }
 
-          std::string file_text((std::istreambuf_iterator<char>(in_stream)), std::istreambuf_iterator<char>());
-          std::cout << "\nText from file: \n\t" << file_text << std::endl;
+          std::string file_text(                                           // If all was good, then read the file
+               (std::istreambuf_iterator<char>(in_stream)),
+               std::istreambuf_iterator<char>());
+
+          std::cout << "\n\nFile Contains: \n\t" << file_text << std::endl; // File Content Report
+
+          
      }
      
      std::cin.get();
