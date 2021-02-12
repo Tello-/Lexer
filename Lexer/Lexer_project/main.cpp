@@ -16,10 +16,8 @@ The purpose of this piece of code is for collecting the file name of
 
 int main(int argc, char** argv)
 {
-     std::string         file_path;
-     std::string         file_text;
-
-     std::ifstream       in_stream;
+     std::string file_path;
+     std::ifstream in_stream;
      
      if (argc)
      {
@@ -27,15 +25,20 @@ int main(int argc, char** argv)
           std::cout << "Retrieved CL arg: \n" 
                     << file_path 
                     << std::endl;
+          int iValue;
+          try
+          {
+               in_stream.open(file_path);              // opening the source file
+          }
+          catch (std::exception exc)                   // TODO: figure out best way to handle exceptions here
+          {
+               std::cerr << "Caught Exception: " << exc.what();
+               
+               return 1;
+          }
 
-          //try
-          //{
-          //     //in_stream.open(file_path);
-          //}
-          //catch ()
-          //{
-
-          //}
+          std::string file_text((std::istreambuf_iterator<char>(in_stream)), std::istreambuf_iterator<char>());
+          std::cout << "\nText from file: \n\t" << file_text << std::endl;
      }
      
      std::cin.get();
@@ -44,8 +47,7 @@ int main(int argc, char** argv)
 
 /*
 
-std::ifstream in("file.txt");
-std::string contents((std::istreambuf_iterator<char>(in)),
-    std::istreambuf_iterator<char>());
-    
+  std::ifstream ifs("filename.txt");    
+  std::string str((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
     */
