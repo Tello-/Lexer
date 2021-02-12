@@ -20,11 +20,11 @@ int main(int argc, char** argv)
      {
           std::string file_string{ argv[1] };
           std::ifstream in(file_string);
-          std::string contents(
+          std::string source_string(
                ( std::istreambuf_iterator<char>(in) ),
                  std::istreambuf_iterator<char>()   );
 
-          std::cout << contents << std::endl;
+          std::cout << source_string << std::endl;
      }
      
      std::cin.get(); // temp fix to keep the console window up before termination of program
