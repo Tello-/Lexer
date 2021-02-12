@@ -12,15 +12,29 @@ The purpose of this piece of code is for collecting the file name of
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 int main(int argc, char** argv)
 {
      if (argc)
      {
           std::string file_string{ argv[1] };
-          std::cout << file_string << std::endl;
+          std::ifstream in(file_string);
+          std::string contents(
+               ( std::istreambuf_iterator<char>(in) ),
+                 std::istreambuf_iterator<char>()   );
+
+          std::cout << contents << std::endl;
      }
      
      std::cin.get(); // temp fix to keep the console window up before termination of program
      return 0;
 }
+
+/*
+
+std::ifstream in("file.txt");
+std::string contents((std::istreambuf_iterator<char>(in)),
+    std::istreambuf_iterator<char>());
+    
+    */
