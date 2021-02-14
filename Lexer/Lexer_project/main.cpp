@@ -27,13 +27,21 @@ int main(int argc, char** argv)
                     << file_path 
                     << std::endl;
 
-          in_stream.exceptions(std::ifstream::failbit); // exception mask for following try block
+          
+          /* A bitmask value of member type iostate formed
+          by a combination of error state flag bits to 
+          be set (badbit, eofbit and/or failbit), or 
+          set to goodbit (or zero).*/
+          in_stream.exceptions(std::ifstream::failbit); 
+          // *******************************************
+
           try
           {
                in_stream.open(file_path, std::ifstream::in);              // opening the source file
                               
           }
-          catch (const std::ifstream::failure& e) {
+          catch (const std::ifstream::failure& e)                         // catch paramter same as bitmask
+          {
                std::ostringstream msg;
                msg << "\n\n**ERROR** \n\nOpening file '" << file_path
                     << "' failed, it either doesn't exist or is not accessible.\n\n";
