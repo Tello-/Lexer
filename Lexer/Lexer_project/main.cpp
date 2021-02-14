@@ -32,10 +32,10 @@ int main(int argc, char** argv)
           state flag bits to be set (badbit, eofbit and/or failbit), or set to goodbit (or zero).*/
           in_stream.exceptions(std::ifstream::failbit);
 
-          // ** Try Loading File from path provided by argv **
-          try
-          {
-               in_stream.open(file_path, std::ifstream::in);              // opening the source file
+               
+          try                                                             // ** Try Loading File from 
+          {                                                               // path provided by argv **
+               in_stream.open(file_path, std::ifstream::in);              
                               
           }
           catch (const std::ifstream::failure& e)                         // catch paramter same as bitmask
@@ -63,6 +63,6 @@ int main(int argc, char** argv)
           
      }
      
-     std::cin.get();
+     std::cin.get();                                                  // Keeps program from terminating (debug)
      return 0;
 }
