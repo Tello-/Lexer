@@ -15,12 +15,22 @@ The purpose of this piece of code is for collecting the file name of
 #include <fstream>
 #include <sstream>
 
+void printFileContents(std::ifstream& in)
+{     
+     std::string file_text((
+          std::istreambuf_iterator<char>(in)),                   // Starting Position
+          std::istreambuf_iterator<char>());                     // Ending Position
+
+     std::cout << "\n\nFile Contains: \n\t" << file_text << std::endl;
+}
+
 int main(int argc, char** argv)
 {
-     std::string file_path;
-     std::ifstream in_stream;
+     std::string file_path;                            // A string to hold the file path of argv[1]
+     std::ifstream in_stream;                          // A stream for loading contents from file argv[1]
      
-     if (argc > 1) // this can pass even when the filepath is not a good one (which is fine but not ideal)
+     if (argc > 1)                                     // this can pass even when the filepath 
+                                                       //is not a good one (which is fine but not ideal)
      {
           file_path.assign(argv[1]);                   // get CL arg and assign it to file_path
           std::cout << "\n\nRetrieved CL arg: \n"      // report file path retrieved
@@ -28,9 +38,11 @@ int main(int argc, char** argv)
                     << std::endl;
 
           
-          /* A bitmask value of member type iostate formed by a combination of error 
-          state flag bits to be set (badbit, eofbit and/or failbit), or set to goodbit (or zero).*/
-          in_stream.exceptions(std::ifstream::failbit);
+                                                       
+          in_stream.exceptions(std::ifstream::failbit);          /* A bitmask value of member type iostate 
+                                                                 formed by a combination of error state flag 
+                                                                 bits to be set (badbit, eofbit and/or failbit), 
+                                                                 or set to goodbit (or zero).*/
 
                
           try                                                             // ** Try Loading File from 
@@ -46,21 +58,10 @@ int main(int argc, char** argv)
                std::cout << msg.str();
                return 1;
           }
-          // *************End of Try/Catch ****************
-
-
-         
-         // string(InputIterator first, InputIterator last);          // Overloaded std::String ctor
-          std::string file_text((                                     
-               std::istreambuf_iterator<char>(in_stream)),            // First
-               std::istreambuf_iterator<char>());                     // Last
-
-
-
-
-          std::cout << "\n\nFile Contains: \n\t" << file_text << std::endl; // File Content Report (for debug only)
-
           
+
+          printFileContents(in_stream);
+         
      }
      
      std::cin.get();                                                  // Keeps program from terminating (debug)
