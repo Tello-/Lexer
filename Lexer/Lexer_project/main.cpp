@@ -25,13 +25,13 @@ void printFileContents(std::ifstream& in)
 }
 
 int main(int argc, char** argv)
-{
-     std::string file_path;                            // A string to hold the file path of argv[1]
-     std::ifstream in_stream;                          // A stream for loading contents from file argv[1]
-     
+{     
      if (argc > 1)                                     // this can pass even when the filepath 
                                                        //is not a good one (which is fine but not ideal)
      {
+          std::string file_path;                       // A string to hold the file path of argv[1]
+          std::ifstream in_stream;                     // A stream for loading contents from file argv[1]
+
           file_path.assign(argv[1]);                   // get CL arg and assign it to file_path
           std::cout << "\n\nRetrieved CL arg: \n"      // report file path retrieved
                     << file_path 
@@ -61,9 +61,10 @@ int main(int argc, char** argv)
           
 
           printFileContents(in_stream);
+          std::cin.get();
          
      }
      
-     std::cin.get();                                                  // Keeps program from terminating (debug)
+                                                      // Keeps program from terminating (debug)
      return 0;
 }
