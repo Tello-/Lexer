@@ -24,6 +24,7 @@ void printFileContents(std::ifstream& in)
      std::cout << "\n\nFile Contains: \n\t" << file_text << std::endl;
 }
 
+
 int main(int argc, char** argv)
 {     
      if (argc > 1)                                     // this can pass even when the filepath 
@@ -47,24 +48,26 @@ int main(int argc, char** argv)
                
           try                                                             // ** Try Loading File from 
           {                                                               // path provided by argv **
-               in_stream.open(file_path, std::ifstream::in);              
-                              
+               in_stream.open(file_path, std::ifstream::in);                                         
           }
           catch (const std::ifstream::failure& e)                         // catch paramter same as bitmask
           {
-               std::ostringstream msg;
-               msg << "\n\n**ERROR** \n\nOpening file '" << file_path
-                    << "' failed, it either doesn't exist or is not accessible.\n\n";
-               std::cout << msg.str();
+               std::ostringstream errorMessage;
+               errorMessage << "\n\n**ERROR** \n\nOpening file '" 
+                            << file_path
+                            << "' failed, it either doesn't exist" 
+                            << "or is not accessible.\n\n";
+               
+               std::cout << errorMessage.str();
+               
                return 1;
           }
           
 
           printFileContents(in_stream);
-          std::cin.get();
-         
+          std::cin.get();                                          // Keeps program from terminating (debug)         
      }
      
-                                                      // Keeps program from terminating (debug)
+                                                      
      return 0;
 }
