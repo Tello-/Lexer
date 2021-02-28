@@ -1,0 +1,19 @@
+int		number;
+int		test1234;
+bool	AorB;
+float	numVal$;
+
+
+number = 10;
+test1234 = 15;
+number /= test1234;
+number = (1 + 1 + 1) % 6;
+
+if (number < test1234)
+	{
+	test1234 = number;
+	}
+else
+	{
+	float = 3.14;
+	}

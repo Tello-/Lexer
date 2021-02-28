@@ -1,0 +1,16 @@
+bool	true_or_false;
+float	float_val = 5.15;
+int		int_val12$45 = 1;
+
+! This is a test 
+block comment !
+
+if( int_val12$45 >= -5)
+	{
+	++float_val;
+	--int_val12$45;
+	}
+else
+	{
+	float = false;
+	} 
