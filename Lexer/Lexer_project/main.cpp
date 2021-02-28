@@ -88,7 +88,7 @@ int main(int argc, char** argv)
      }
 
      of_stream.close();                 // close file
-     std::cin.get();                    // Keeps program from terminating (debug)
+     //std::cin.get();                    // Keeps program from terminating (debug)
      return 0;
 }
 
