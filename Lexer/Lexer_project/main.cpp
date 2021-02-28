@@ -111,17 +111,25 @@ void lexer_analysis(int& curr_Position, string file_String, ofstream& write_to_F
                2     End identifier          6     End real/float
                3     In integer              7     General punctuation
      */
-     int state[8][7] = {
-             {1, 3, 7, 7, 7, 7, 7},
-             {1, 1, 2, 1, 1, 2, 7},
-             {0, 0, 0, 0, 0, 0, 0},
-             {4, 3, 5, 7, 7, 4, 7},
-             {0, 0, 0, 0, 0, 0, 0},
-             {6, 5, 6, 7, 7, 6, 7},
-             {0, 0, 0, 0, 0, 0, 0},
-             {0, 0, 0, 0, 0, 0, 0}
+     
+     
+     enum State { STARTING, IN_ID, END_ID, IN_INT, END_INT, IN_REAL, END_REAL, GENERAL_PUNC };
+
+     State state[8][7] = {
+             {STARTING, IN_INT,   GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC},
+             {IN_ID,    IN_ID,    END_ID,       IN_ID,        IN_ID,        END_ID,       GENERAL_PUNC},
+             {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING},
+             {END_INT,  IN_INT,   IN_REAL,      GENERAL_PUNC, GENERAL_PUNC, END_INT,      GENERAL_PUNC},
+             {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING},
+             {END_REAL, IN_REAL,  END_REAL,     GENERAL_PUNC, GENERAL_PUNC, END_REAL,     GENERAL_PUNC},
+             {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING},
+             {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING}
      };              //initialize state table
-     int intstate, realstate;                      // character pointer
+     //int intstate,  // TODO remove this line
+     int realstate;                      // character pointer
+
+
+
      static std::string token, prevtoken;                            // character string recognized token and previous token (if necessary)
 
 
