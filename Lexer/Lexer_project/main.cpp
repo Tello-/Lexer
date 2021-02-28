@@ -262,7 +262,7 @@ void lexer_analysis(int& curr_Position, string file_String, ofstream& write_to_F
                // determine the next course of action based on table
                switch (lexState)
                {
-               case 2:
+               case END_ID:
                     token.pop_back();          // pop the current token
                     // check to see if the token is a keyword
                     if (regex_match(token, keyword))
@@ -276,19 +276,19 @@ void lexer_analysis(int& curr_Position, string file_String, ofstream& write_to_F
                     exitFlag = 1;
                     break;
 
-               case 4:
+               case END_INT:
                     token.pop_back();          // pop the current token
                     write_to_File << "INTEGER\t\t=\t" << token << std::endl; // write to file
                     exitFlag = 1;
                     break;
 
-               case 6:
+               case END_REAL:
                     token.pop_back();          // pop the current token
                     write_to_File << "REAL\t\t=\t" << token << std::endl;   // write to file
                     exitFlag = 1;
                     break;
 
-               case 7:
+               case GENERAL_PUNC:
                     exitFlag = 2;
                     break;
                }
