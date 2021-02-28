@@ -116,7 +116,7 @@ void lexer_analysis(int& curr_Position, string file_String, ofstream& write_to_F
      enum State { STARTING, IN_ID, END_ID, IN_INT, END_INT, IN_REAL, END_REAL, GENERAL_PUNC };
 
      State state[8][7] = {
-             {STARTING, IN_INT,   GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC},
+             {IN_ID,    IN_INT,   GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC, GENERAL_PUNC},
              {IN_ID,    IN_ID,    END_ID,       IN_ID,        IN_ID,        END_ID,       GENERAL_PUNC},
              {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING},
              {END_INT,  IN_INT,   IN_REAL,      GENERAL_PUNC, GENERAL_PUNC, END_INT,      GENERAL_PUNC},
