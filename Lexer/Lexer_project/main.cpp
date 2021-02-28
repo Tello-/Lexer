@@ -125,7 +125,7 @@ void lexer_analysis(int& curr_Position, string file_String, ofstream& write_to_F
              {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING},
              {STARTING, STARTING, STARTING,     STARTING,     STARTING,     STARTING,     STARTING}
      };              //initialize state table
-     //int intstate,  // TODO remove this line
+     
      int realstate;                      // character pointer
 
 
